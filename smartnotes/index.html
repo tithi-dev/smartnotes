@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen p-4 md:p-8 transition-colors duration-300 dark:bg-[#0f172a] dark:text-slate-100 bg-gray-50 text-gray-800 font-outfit">
+
+    <header class="max-w-5xl mx-auto flex justify-between items-center mb-10">
+        <h1 class="text-3xl font-bold tracking-tight">
+            <span class="text-indigo-500">Smart</span>Notes
+        </h1>
+        <div class="flex items-center gap-4">
+            <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-800 transition text-xl">
+                <span id="themeIcon">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <div class="glass p-6 rounded-3xl shadow-xl border dark:border-slate-700 border-gray-200 bg-white dark:bg-slate-800/50">
+            <input type="text" id="noteTitle" class="w-full bg-transparent border-none focus:ring-0 text-2xl font-bold mb-4 outline-none placeholder-gray-400" placeholder="Note Title">
+            <textarea id="userInput" class="w-full bg-transparent border-none focus:ring-0 text-lg outline-none resize-none h-60 placeholder-gray-400" placeholder="Type here or click the 🎤 button to speak..."></textarea>
+            
+            <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+                <button onclick="startVoice()" id="voiceBtn" class="action-btn text-emerald-500 border-emerald-500/20 bg-emerald-500/5">🎤 Voice Type</button>
+                <button onclick="downloadNote()" class="action-btn text-orange-500 border-orange-500/20 bg-orange-500/5">📥 Download Text</button>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-6">
+            <div class="glass p-6 rounded-3xl shadow-xl border dark:border-slate-700 border-gray-200 bg-white dark:bg-slate-800/50">
+                <h3 class="text-xs font-bold mb-4 text-gray-400 uppercase tracking-widest">AI Smart Tools</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="processAI('summarize')" class="ai-tool-btn">✨ Summarize</button>
+                    <button onclick="processAI('expand')" class="ai-tool-btn">📝 Expand Note</button>
+                    <button onclick="processAI('fix-grammar')" class="ai-tool-btn">✍️ Fix Grammar</button>
+                    <button onclick="processAI('key-points')" class="ai-tool-btn">🎯 Key Points</button>
+                </div>
+            </div>
+
+            <div id="aiResponseContainer" class="hidden glass p-6 rounded-3xl border border-indigo-500/30 bg-indigo-500/5 min-h-[200px]">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-indigo-400 text-xs font-bold uppercase tracking-widest">AI Generated Result</h3>
+                    <button onclick="copyAIResult()" class="text-xs text-indigo-400 hover:underline">Copy</button>
+                </div>
+                <div id="aiResponse" class="text-slate-300 leading-relaxed whitespace-pre-wrap"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
